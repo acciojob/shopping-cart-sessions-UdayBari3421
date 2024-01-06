@@ -48,7 +48,7 @@ function addToCart(productId) {
   const existingItem = cartData.find((item) => item.id === productId);
 
   if (existingItem) {
-    // If the product is already in the cart, update the quantity or take any other action if needed
+    // If the product is already in the cart, update the quantity
     existingItem.quantity = (existingItem.quantity || 1) + 1;
   } else {
     // If the product is not in the cart, add it
