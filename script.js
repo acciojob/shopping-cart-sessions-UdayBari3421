@@ -1,8 +1,3 @@
-// script.js
-
-// This is the boilerplate code given for you
-// You can modify this code
-// Product data
 const products = [
   { id: 1, name: "Product 1", price: 10 },
   { id: 2, name: "Product 2", price: 20 },
@@ -49,8 +44,16 @@ function addToCart(productId) {
   // Get cart data from session storage
   const cartData = JSON.parse(sessionStorage.getItem("cart")) || [];
 
-  // Add the product to the cart
-  cartData.push({ id: product.id, name: product.name, price: product.price });
+  // Check if the product is already in the cart
+  const existingItem = cartData.find((item) => item.id === productId);
+
+  if (existingItem) {
+    // If the product is already in the cart, update the quantity or take any other action if needed
+    existingItem.quantity = (existingItem.quantity || 1) + 1;
+  } else {
+    // If the product is not in the cart, add it
+    cartData.push({ id: product.id, name: product.name, price: product.price, quantity: 1 });
+  }
 
   // Save the updated cart data to session storage
   sessionStorage.setItem("cart", JSON.stringify(cartData));
